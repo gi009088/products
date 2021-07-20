@@ -1,11 +1,19 @@
-#讀取檔案
+#載入模組查看檔案是否存在
+import os
 products = []
-with open('products.csv','r', encoding = 'utf-8') as f:
-	for line in f:
-		if '商品,價格,日期' in line:
-			continue	#挑過本回合
-		name, price, date = line.strip().split(',')  #先去掉"\n"再使用逗點分割
-		products.append([name, price, date])	#將讀取的檔案放到主要清單中
+
+if os.path.isfile('products.csv'):
+	print('檔案存在~')
+
+	#讀取檔案
+	with open('products.csv','r', encoding = 'utf-8') as f:
+		for line in f:
+			if '商品,價格,日期' in line:
+				continue	#挑過本回合
+			name, price, date = line.strip().split(',')  #先去掉"\n"再使用逗點分割
+			products.append([name, price, date])	#將讀取的檔案放到主要清單中
+else:
+	print('首次執行程式')
 
 #讓使用者輸入
 while True:
